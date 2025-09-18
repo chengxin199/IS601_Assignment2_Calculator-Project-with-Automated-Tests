@@ -50,10 +50,12 @@ def calculator():
             try:
                 result = division(num1, num2)  # We call the division function to divide the two numbers.
             except ValueError as e:
-                # This part handles the case where someone tries to divide by zero, which we can't do.
-                # The division function will throw an error if someone tries dividing by zero, and we catch that error here.
-                print(e)  # Show the error message.
-                continue  # Go back to the top of the loop and try again.
+                # When division raises a ValueError for divide-by-zero, print the message tests expect.
+                if str(e) == "Cannot divide by zero.":
+                    print("Division by zero is not allowed")
+                else:
+                    print(e)
+                continue
         else:
             # If the user types an operation we don't understand, we show them a message.
             print(f"Unknown operation '{operation}'. Supported operations: add, subtract, multiply, divide.")
